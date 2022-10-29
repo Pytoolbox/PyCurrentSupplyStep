@@ -1,27 +1,22 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct 17 15:08:23 2022
 
-@author: Admin
-"""
 
 # -*- coding: utf-8 -*-
 """
 Created on Mon Oct 10 11:35:34 2022
 
-@author: Admin
+@author: Rahill Ismael 
 """
-# TGME TEST AND AQU···
+# Used to test AgNP sintering via current 
 
 
-# ser = serial.Serial('COM9', 9600)  # open serial port
-# print(ser.name)         # check which port was really used
-# ser.write(("V1 0.01 \r \n").encode())   # write a string
-# ser.write(("I1 0.001 \r \n").encode())   # write a string
-# ser.write(("OP1 1 \r \n").encode())   # write a string
-# time.sleep(0.01)
-# ser.write(("V1 1 \r \n").encode())   # write a string
-# ser.write(("V1 30 \r \n").encode())   # write a string
+ser = serial.Serial('COM9', 9600)  # open serial port
+print(ser.name)         # check which port was really used
+ser.write(("V1 0.01 \r \n").encode())   # write a string
+ser.write(("I1 0.001 \r \n").encode())   # write a string
+ser.write(("OP1 1 \r \n").encode())   # write a string
+time.sleep(0.01)
+ser.write(("V1 1 \r \n").encode())   # write a string
+ser.write(("V1 30 \r \n").encode())   # write a string
 
 
 
@@ -102,15 +97,15 @@ def timer(*args):
     print(str(args[0])+" It's "+str(time.ctime()))
     try:
         print(curr_s[(int(args[0]))])
-        # ser.write(("I1 "+str(curr_s[(int(args[0]))]/1000)+"\r \n").encode())
-        # ser.flush()
+        ser.write(("I1 "+str(curr_s[(int(args[0]))]/1000)+"\r \n").encode())
+        ser.flush()
         next = int(args[0])+1
         threading.Timer(0.05, timer, [str(next)]).start()
     except:
-        # ser.write(("V1 0.01 \r \n").encode())   # write a string
-        # ser.write(("I1 0.001 \r \n").encode())   # write a string
-        # ser.write(("OP1 0 \r \n").encode())   # write a string
-        # ser.close()
+        ser.write(("V1 0.01 \r \n").encode())   # write a string
+        ser.write(("I1 0.001 \r \n").encode())   # write a string
+        ser.write(("OP1 0 \r \n").encode())   # write a string
+        ser.close()
         SystemExit()
 
 
